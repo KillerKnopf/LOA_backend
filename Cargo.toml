@@ -2,7 +2,44 @@
 name = "loa_backend"
 version = "0.1.0"
 edition = "2021"
+authors = ["Marc Knopf"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+# Serialization and Deserialazation of data types and structs
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = { version = "1.0.107" }
+serde_yaml = "0.9.25"
+# Async runtime
+tokio = { version = "1.32.0", features = ["full"] }
+# Library to query sql databases
+sqlx = { version = "0.7.1", features = [
+	"runtime-tokio",
+	"tls-rustls",
+	"mysql",
+	"macros",
+	"uuid",
+	"json",
+] }
+# Web framework that provides the server
+axum = { version = "0.6.20", features = ["tokio"] }
+# Datetime crate
+chrono = { version = "0.4.31", features = ["serde"] }
+# Macros for axum
+axum-macros = "0.3.8"
+# Generate UUIDs
+uuid = { version = "1.4.1", features = ["v4"] }
+# OpenApi integration for axum
+utoipa = { version = "3.5.0", features = ["yaml", "axum_extras"] }
+utoipa-swagger-ui = { version = "3.1.5", features = ["axum"] }
+
+#[dev-dependencies]
+# Diagnostic information / logging
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
+# Error report handler for panics. For colorful consistent panic logs
+color-eyre = "0.6.2"
+
+[profile.dev.package.sqlx-macros]
+opt-level = 3
