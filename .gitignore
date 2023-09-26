@@ -1,0 +1,5 @@
+# Ignore built files
+/target
+
+# Ignore files with secrets
+/.env.*
